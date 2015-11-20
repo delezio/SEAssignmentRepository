@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SteveDelezioSEAssignment2Sit1.Models.tbl_Articles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticlePublishDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleMediaManagerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleStatusId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_Users.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleComments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticlePublishDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleMediaManagerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleStatusId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_Users.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ArticleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ArticleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ArticleId })
+        </td>
+    </tr>
+}
+
+</table>

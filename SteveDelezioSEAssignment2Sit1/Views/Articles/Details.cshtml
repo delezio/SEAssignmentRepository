@@ -1,0 +1,74 @@
+﻿@model SteveDelezioSEAssignment2Sit1.Models.tbl_Articles
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_Articles</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleComments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleComments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticlePublishDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticlePublishDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleMediaManagerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleMediaManagerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArticleStatusId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArticleStatusId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Users.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Users.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArticleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
