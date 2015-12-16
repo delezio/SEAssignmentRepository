@@ -125,6 +125,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Patterns\ArticleComponent.cs" />
+    <Compile Include="Models\Patterns\ArticleFactory.cs" />
+    <Compile Include="Models\Patterns\FacebookArticle.cs" />
+    <Compile Include="Models\Patterns\PublishToAll.cs" />
+    <Compile Include="Models\Patterns\TextArticle.cs" />
+    <Compile Include="Models\Patterns\TwitterArticle.cs" />
+    <Compile Include="Models\Patterns\VideoArticle.cs" />
     <Compile Include="Models\Services\IServiceManager.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -234,20 +241,20 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Web References\MyService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
-    <Content Include="Web References\MyService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
     <None Include="Web References\MyService\ServiceManager.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Patterns\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -266,10 +273,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:12462/ServiceManager.svc%3fsingleWsdl">
+    <WebReferenceUrl Include="http://localhost:12462/Models/Services/ServiceManager.svc%3fsingleWsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\MyService\</RelPath>
-      <UpdateFromURL>http://localhost:12462/ServiceManager.svc%3fsingleWsdl</UpdateFromURL>
+      <UpdateFromURL>http://localhost:12462/Models/Services/ServiceManager.svc%3fsingleWsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

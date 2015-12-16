@@ -7,12 +7,37 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SteveDelezioSEAssignment2Sit1.Models;
+using System.Web.Security;
 
 namespace SteveDelezioSEAssignment2Sit1.Controllers
 {
     public class UsersController : Controller
     {
         private DataContext db = new DataContext();
+        MyService.ServiceManager ms = new MyService.ServiceManager();
+        
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(tbl_Users u)
+        {
+           
+            if (ms.Login(u.Username, u.Password))
+            {
+                ViewBag.Message = "";
+                FormsAuthentication.SetAuthCookie(u.Username, true);
+                return View();
+            }
+            else
+            {
+                ViewBag.Message = "Invalid Credentials";
+                return View();
+            }
+
+        }
+
 
         // GET: Users
         public ActionResult Index()

@@ -26,7 +26,7 @@ namespace SteveDelezioSEAssignment2Sit1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:12462/ServiceManager.svc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:12462/Models/Services/ServiceManager.svc")]
         public string SteveDelezioSEAssignment2Sit1_MyService_ServiceManager {
             get {
                 return ((string)(this["SteveDelezioSEAssignment2Sit1_MyService_ServiceManager"]));

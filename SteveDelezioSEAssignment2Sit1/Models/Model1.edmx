@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SEAssignment2Sit1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SEAssignment2Sit1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -53,6 +53,18 @@
           <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tbl_Articles_tbl_ArticleStatuses">
+          <End Role="tbl_ArticleStatuses" Type="Self.tbl_ArticleStatuses" Multiplicity="1" />
+          <End Role="tbl_Articles" Type="Self.tbl_Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ArticleStatuses">
+              <PropertyRef Name="ArticleStatusId" />
+            </Principal>
+            <Dependent Role="tbl_Articles">
+              <PropertyRef Name="ArticleStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbl_Articles_tbl_Users">
           <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="1" />
           <End Role="tbl_Articles" Type="Self.tbl_Articles" Multiplicity="*" />
@@ -83,6 +95,10 @@
           <EntitySet Name="tbl_ArticleStatuses" EntityType="Self.tbl_ArticleStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Articles_tbl_ArticleStatuses" Association="Self.FK_tbl_Articles_tbl_ArticleStatuses">
+            <End Role="tbl_ArticleStatuses" EntitySet="tbl_ArticleStatuses" />
+            <End Role="tbl_Articles" EntitySet="tbl_Articles" />
+          </AssociationSet>
           <AssociationSet Name="FK_tbl_Articles_tbl_Users" Association="Self.FK_tbl_Articles_tbl_Users">
             <End Role="tbl_Users" EntitySet="tbl_Users" />
             <End Role="tbl_Articles" EntitySet="tbl_Articles" />
@@ -92,8 +108,7 @@
             <End Role="tbl_Users" EntitySet="tbl_Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEAssignment2Sit1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -120,6 +135,7 @@
           <Property Name="ArticleMediaManagerId" Type="Int32" Nullable="false" />
           <Property Name="ArticleStatusId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_Users" Relationship="Self.FK_tbl_Articles_tbl_Users" FromRole="tbl_Articles" ToRole="tbl_Users" />
+          <NavigationProperty Name="tbl_ArticleStatuses" Relationship="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses" FromRole="tbl_Articles" ToRole="tbl_ArticleStatuses" />
         </EntityType>
         <EntityType Name="tbl_ArticleStatuses">
           <Key>
@@ -127,6 +143,7 @@
           </Key>
           <Property Name="ArticleStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ArticleStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_Articles" Relationship="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses" FromRole="tbl_ArticleStatuses" ToRole="tbl_Articles" />
         </EntityType>
         <EntityType Name="tbl_Roles">
           <Key>
@@ -187,7 +204,23 @@
             <End Role="tbl_Roles" EntitySet="tbl_Roles" />
             <End Role="tbl_Users" EntitySet="tbl_Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_tbl_Articles_tbl_ArticleStatuses" Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses">
+            <End Role="tbl_ArticleStatuses" EntitySet="tbl_ArticleStatuses" />
+            <End Role="tbl_Articles" EntitySet="tbl_Articles" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_tbl_Articles_tbl_ArticleStatuses">
+          <End Type="SEAssignment2Sit1Model.tbl_ArticleStatuses" Role="tbl_ArticleStatuses" Multiplicity="1" />
+          <End Type="SEAssignment2Sit1Model.tbl_Articles" Role="tbl_Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ArticleStatuses">
+              <PropertyRef Name="ArticleStatusId" />
+            </Principal>
+            <Dependent Role="tbl_Articles">
+              <PropertyRef Name="ArticleStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

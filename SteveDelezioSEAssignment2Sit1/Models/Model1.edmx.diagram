@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_Users" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_Users" ManuallyRouted="false" />
         <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Users_tbl_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

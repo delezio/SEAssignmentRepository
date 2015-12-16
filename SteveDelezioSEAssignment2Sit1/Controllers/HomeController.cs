@@ -12,7 +12,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles="MediaManager")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

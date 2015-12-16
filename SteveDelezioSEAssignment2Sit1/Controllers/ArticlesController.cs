@@ -17,7 +17,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         // GET: Articles
         public ActionResult Index()
         {
-            var tbl_Articles = db.tbl_Articles.Include(t => t.tbl_Users);
+            var tbl_Articles = db.tbl_Articles.Include(t => t.tbl_Users).Include(t => t.tbl_ArticleStatuses);
             return View(tbl_Articles.ToList());
         }
 
@@ -40,7 +40,11 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         public ActionResult Create()
         {
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username");
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName");
+
+
             return View();
+
         }
 
         // POST: Articles/Create
@@ -58,6 +62,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             }
 
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
             return View(tbl_Articles);
         }
 
@@ -74,6 +79,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
             return View(tbl_Articles);
         }
 
@@ -91,6 +97,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
             return View(tbl_Articles);
         }
 

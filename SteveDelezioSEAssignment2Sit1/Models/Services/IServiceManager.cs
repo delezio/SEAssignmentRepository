@@ -13,5 +13,8 @@ namespace SteveDelezioSEAssignment2Sit1
     {
         [OperationContract]
         void DoWork();
+        [OperationContract]
+        [XmlSerializerFormat]
+        bool Login(string username, string password);
     }
 }

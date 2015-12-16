@@ -27,10 +27,10 @@
             @Html.DisplayNameFor(model => model.ArticleMediaManagerId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ArticleStatusId)
+            @Html.DisplayNameFor(model => model.tbl_Users.Username)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tbl_Users.Username)
+            @Html.DisplayNameFor(model => model.tbl_ArticleStatuses.ArticleStatusName)
         </th>
         <th></th>
     </tr>
@@ -53,10 +53,10 @@
             @Html.DisplayFor(modelItem => item.ArticleMediaManagerId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ArticleStatusId)
+            @Html.DisplayFor(modelItem => item.tbl_Users.Username)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tbl_Users.Username)
+            @Html.DisplayFor(modelItem => item.tbl_ArticleStatuses.ArticleStatusName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ArticleId }) |

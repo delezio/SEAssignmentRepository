@@ -12,6 +12,21 @@
           <xs:sequence />
         </xs:complexType>
       </xs:element>
+      <xs:element name="Login">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="username" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="password" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LoginResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="LoginResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IServiceManager_DoWork_InputMessage">
@@ -20,10 +35,20 @@
   <wsdl:message name="IServiceManager_DoWork_OutputMessage">
     <wsdl:part name="parameters" element="tns:DoWorkResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceManager_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceManager">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DoWork" message="tns:IServiceManager_DoWork_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/DoWorkResponse" message="tns:IServiceManager_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/Login" message="tns:IServiceManager_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/LoginResponse" message="tns:IServiceManager_Login_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceManager" type="tns:IServiceManager">
@@ -37,10 +62,19 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ServiceManager">
     <wsdl:port name="BasicHttpBinding_IServiceManager" binding="tns:BasicHttpBinding_IServiceManager">
-      <soap:address location="http://localhost:12462/ServiceManager.svc" />
+      <soap:address location="http://localhost:12462/Models/Services/ServiceManager.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
