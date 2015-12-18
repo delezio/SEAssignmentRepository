@@ -13,6 +13,8 @@
         <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_Users" ManuallyRouted="false" />
         <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Users_tbl_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses" />
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_ArticleStates" Width="1.5" PointX="8.75" PointY="4.375" />
+        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStates" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,6 +27,14 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="ArticleMediaManagerId" Type="int" Nullable="false" />
           <Property Name="ArticleStatusId" Type="int" Nullable="false" />
+          <Property Name="ArticleStateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_ArticleStates">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_ArticleStatuses">
           <Key>
@@ -53,6 +61,18 @@
           <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tbl_Articles_tbl_ArticleStates">
+          <End Role="tbl_ArticleStates" Type="Self.tbl_ArticleStates" Multiplicity="1" />
+          <End Role="tbl_Articles" Type="Self.tbl_Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ArticleStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tbl_Articles">
+              <PropertyRef Name="ArticleStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbl_Articles_tbl_ArticleStatuses">
           <End Role="tbl_ArticleStatuses" Type="Self.tbl_ArticleStatuses" Multiplicity="1" />
           <End Role="tbl_Articles" Type="Self.tbl_Articles" Multiplicity="*" />
@@ -92,9 +112,14 @@
         <EntityContainer Name="SEAssignment2Sit1ModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Articles" EntityType="Self.tbl_Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ArticleStates" EntityType="Self.tbl_ArticleStates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_ArticleStatuses" EntityType="Self.tbl_ArticleStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Articles_tbl_ArticleStates" Association="Self.FK_tbl_Articles_tbl_ArticleStates">
+            <End Role="tbl_ArticleStates" EntitySet="tbl_ArticleStates" />
+            <End Role="tbl_Articles" EntitySet="tbl_Articles" />
+          </AssociationSet>
           <AssociationSet Name="FK_tbl_Articles_tbl_ArticleStatuses" Association="Self.FK_tbl_Articles_tbl_ArticleStatuses">
             <End Role="tbl_ArticleStatuses" EntitySet="tbl_ArticleStatuses" />
             <End Role="tbl_Articles" EntitySet="tbl_Articles" />
@@ -136,6 +161,8 @@
           <Property Name="ArticleStatusId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_Users" Relationship="Self.FK_tbl_Articles_tbl_Users" FromRole="tbl_Articles" ToRole="tbl_Users" />
           <NavigationProperty Name="tbl_ArticleStatuses" Relationship="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses" FromRole="tbl_Articles" ToRole="tbl_ArticleStatuses" />
+          <Property Name="ArticleStateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_ArticleStates" Relationship="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStates" FromRole="tbl_Articles" ToRole="tbl_ArticleStates" />
         </EntityType>
         <EntityType Name="tbl_ArticleStatuses">
           <Key>
@@ -208,6 +235,11 @@
             <End Role="tbl_ArticleStatuses" EntitySet="tbl_ArticleStatuses" />
             <End Role="tbl_Articles" EntitySet="tbl_Articles" />
           </AssociationSet>
+          <EntitySet Name="tbl_ArticleStates" EntityType="SEAssignment2Sit1Model.tbl_ArticleStates" />
+          <AssociationSet Name="FK_tbl_Articles_tbl_ArticleStates" Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStates">
+            <End Role="tbl_ArticleStates" EntitySet="tbl_ArticleStates" />
+            <End Role="tbl_Articles" EntitySet="tbl_Articles" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_tbl_Articles_tbl_ArticleStatuses">
           <End Type="SEAssignment2Sit1Model.tbl_ArticleStatuses" Role="tbl_ArticleStatuses" Multiplicity="1" />
@@ -218,6 +250,26 @@
             </Principal>
             <Dependent Role="tbl_Articles">
               <PropertyRef Name="ArticleStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_ArticleStates">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Articles" Relationship="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStates" FromRole="tbl_ArticleStates" ToRole="tbl_Articles" />
+        </EntityType>
+        <Association Name="FK_tbl_Articles_tbl_ArticleStates">
+          <End Type="SEAssignment2Sit1Model.tbl_ArticleStates" Role="tbl_ArticleStates" Multiplicity="1" />
+          <End Type="SEAssignment2Sit1Model.tbl_Articles" Role="tbl_Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ArticleStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tbl_Articles">
+              <PropertyRef Name="ArticleStateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -241,6 +293,7 @@
           <EntitySetMapping Name="tbl_Articles">
             <EntityTypeMapping TypeName="SEAssignment2Sit1Model.tbl_Articles">
               <MappingFragment StoreEntitySet="tbl_Articles">
+                <ScalarProperty Name="ArticleStateId" ColumnName="ArticleStateId" />
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="ArticleTitle" ColumnName="ArticleTitle" />
                 <ScalarProperty Name="ArticleContent" ColumnName="ArticleContent" />
@@ -277,6 +330,14 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ArticleStates">
+            <EntityTypeMapping TypeName="SEAssignment2Sit1Model.tbl_ArticleStates">
+              <MappingFragment StoreEntitySet="tbl_ArticleStates">
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

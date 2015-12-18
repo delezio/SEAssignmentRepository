@@ -13,7 +13,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
     public class ArticlesController : Controller
     {
         private DataContext db = new DataContext();
-
+        MyService.ServiceManager ms = new MyService.ServiceManager();
         // GET: Articles
         public ActionResult Index()
         {
@@ -41,10 +41,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         {
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username");
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName");
-
-
             return View();
-
         }
 
         // POST: Articles/Create
@@ -62,6 +59,41 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             }
 
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
+            return View(tbl_Articles);
+        }
+        public ActionResult CreateArticle()
+        {
+            ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username");
+            ViewBag.MediaManagerId = new SelectList(db.tbl_Users.Where(x=>x.RoleId==2), "UserId", "Username");
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName");
+            return View();
+        }
+
+        // POST: Articles/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateArticle([Bind(Include = "ArticleId,ArticleTitle,ArticleContent,ArticleComments,ArticlePublishDateTime,UserId,ArticleMediaManagerId,ArticleStatusId")] tbl_Articles tbl_Articles)
+        {
+            if (ModelState.IsValid)
+            {
+                tbl_Articles.ArticleComments = "";
+                tbl_Articles.UserId = db.tbl_Users.SingleOrDefault(x=>x.Username==HttpContext.User.Identity.Name).UserId;
+                tbl_Articles.ArticleStateId = 1;
+                tbl_Articles.ArticleStatusId = 5;
+                ms.CreateArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments,
+                    tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId,
+                    tbl_Articles.ArticleStatusId, tbl_Articles.ArticleStateId);
+               // db.tbl_Articles.Add(tbl_Articles);
+
+              //  db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.MediaManagerId = new SelectList(db.tbl_Users.Where(x => x.RoleId == 2), "UserId", "Username");
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
             return View(tbl_Articles);
         }

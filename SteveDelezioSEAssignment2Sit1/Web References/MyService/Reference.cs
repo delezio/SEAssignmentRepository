@@ -33,6 +33,8 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         private System.Threading.SendOrPostCallback LoginOperationCompleted;
         
+        private System.Threading.SendOrPostCallback CreateArticleOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -76,6 +78,9 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         /// <remarks/>
         public event LoginCompletedEventHandler LoginCompleted;
+        
+        /// <remarks/>
+        public event CreateArticleCompletedEventHandler CreateArticleCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/DoWork", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -135,6 +140,48 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/CreateArticle", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void CreateArticle(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId) {
+            this.Invoke("CreateArticle", new object[] {
+                        articleTitle,
+                        articleContent,
+                        articleComment,
+                        articlePublishDate,
+                        userId,
+                        mediaManagerId,
+                        articleStatusId,
+                        articleStateId});
+        }
+        
+        /// <remarks/>
+        public void CreateArticleAsync(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId) {
+            this.CreateArticleAsync(articleTitle, articleContent, articleComment, articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, null);
+        }
+        
+        /// <remarks/>
+        public void CreateArticleAsync(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, object userState) {
+            if ((this.CreateArticleOperationCompleted == null)) {
+                this.CreateArticleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateArticleOperationCompleted);
+            }
+            this.InvokeAsync("CreateArticle", new object[] {
+                        articleTitle,
+                        articleContent,
+                        articleComment,
+                        articlePublishDate,
+                        userId,
+                        mediaManagerId,
+                        articleStatusId,
+                        articleStateId}, this.CreateArticleOperationCompleted, userState);
+        }
+        
+        private void OnCreateArticleOperationCompleted(object arg) {
+            if ((this.CreateArticleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateArticleCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -182,6 +229,10 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
+    public delegate void CreateArticleCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

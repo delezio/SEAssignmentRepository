@@ -42,6 +42,8 @@ public partial class DataContext : DbContext
 
     public DbSet<tbl_Users> tbl_Users { get; set; }
 
+    public DbSet<tbl_ArticleStates> tbl_ArticleStates { get; set; }
+
 }
 
 }

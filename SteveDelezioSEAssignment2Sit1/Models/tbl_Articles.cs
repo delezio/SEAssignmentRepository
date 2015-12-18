@@ -34,11 +34,15 @@ public partial class tbl_Articles
 
     public int ArticleStatusId { get; set; }
 
+    public int ArticleStateId { get; set; }
+
 
 
     public virtual tbl_Users tbl_Users { get; set; }
 
     public virtual tbl_ArticleStatuses tbl_ArticleStatuses { get; set; }
+
+    public virtual tbl_ArticleStates tbl_ArticleStates { get; set; }
 
 }
 

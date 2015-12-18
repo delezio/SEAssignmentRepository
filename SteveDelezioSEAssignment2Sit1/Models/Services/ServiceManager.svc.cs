@@ -5,6 +5,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using SteveDelezioSEAssignment2Sit1.Models.Patterns;
+using SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern;
+using System.Reflection;
 
 namespace SteveDelezioSEAssignment2Sit1
 {
@@ -27,5 +30,23 @@ namespace SteveDelezioSEAssignment2Sit1
                 return false;
             }
         }
+
+
+        public void CreateArticle(string articleTitle, string articleContent, string articleComment,
+            DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId)
+        {
+            // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState.cs");
+            //string state =db.tbl_Articles.SingleOrDefault(x => x.ArticleId == 1).tbl_ArticleStates.StateName;
+           // string fullname = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + state;
+            Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
+            //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
+            // (IArticleState)s.GetConstructor()
+
+            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId);
+            af.CreateArticle();
+
+        }
+
     }
 }

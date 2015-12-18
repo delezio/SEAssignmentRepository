@@ -16,5 +16,9 @@ namespace SteveDelezioSEAssignment2Sit1
         [OperationContract]
         [XmlSerializerFormat]
         bool Login(string username, string password);
+
+        [OperationContract]
+        [XmlSerializerFormat]
+        void CreateArticle(string articleTitle, string articleContent,string articleComment,DateTime articlePublishDate,int userId, int mediaManagerId,int articleStatusId,int articleStateId);
     }
 }

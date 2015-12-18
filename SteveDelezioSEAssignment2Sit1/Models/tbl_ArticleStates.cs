@@ -15,10 +15,10 @@ namespace SteveDelezioSEAssignment2Sit1.Models
 using System;
     using System.Collections.Generic;
     
-public partial class tbl_Users
+public partial class tbl_ArticleStates
 {
 
-    public tbl_Users()
+    public tbl_ArticleStates()
     {
 
         this.tbl_Articles = new HashSet<tbl_Articles>();
@@ -26,23 +26,13 @@ public partial class tbl_Users
     }
 
 
-    public int UserId { get; set; }
+    public int StateId { get; set; }
 
-    public string Username { get; set; }
-
-    public string Password { get; set; }
-
-    public string FirstName { get; set; }
-
-    public string Surname { get; set; }
-
-    public int RoleId { get; set; }
+    public string StateName { get; set; }
 
 
 
     public virtual ICollection<tbl_Articles> tbl_Articles { get; set; }
-
-    public virtual tbl_Roles tbl_Roles { get; set; }
 
 }
 

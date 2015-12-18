@@ -27,6 +27,23 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="CreateArticle">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="articleTitle" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleContent" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleComment" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articlePublishDate" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" name="userId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="mediaManagerId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStatusId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStateId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CreateArticleResponse">
+        <xs:complexType />
+      </xs:element>
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IServiceManager_DoWork_InputMessage">
@@ -41,6 +58,12 @@
   <wsdl:message name="IServiceManager_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceManager_CreateArticle_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateArticle" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_CreateArticle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateArticleResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceManager">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DoWork" message="tns:IServiceManager_DoWork_InputMessage" />
@@ -49,6 +72,10 @@
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/Login" message="tns:IServiceManager_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/LoginResponse" message="tns:IServiceManager_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateArticle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/CreateArticle" message="tns:IServiceManager_CreateArticle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/CreateArticleResponse" message="tns:IServiceManager_CreateArticle_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceManager" type="tns:IServiceManager">
@@ -64,6 +91,15 @@
     </wsdl:operation>
     <wsdl:operation name="Login">
       <soap:operation soapAction="http://tempuri.org/IServiceManager/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateArticle">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/CreateArticle" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

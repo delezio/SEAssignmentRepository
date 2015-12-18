@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern;
 
 namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
 {
@@ -12,6 +13,8 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
             ArticleFactory af = new TextArticle();
             ArticleComponent ac = new FacebookArticle(af,new TwitterArticle(af));
             ac.Upload(af);
+
+            
         }
     }
 }
