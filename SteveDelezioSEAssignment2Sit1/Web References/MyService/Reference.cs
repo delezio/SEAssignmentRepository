@@ -35,6 +35,10 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         private System.Threading.SendOrPostCallback CreateArticleOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AcceptArticleOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RejectArticleOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -81,6 +85,12 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         /// <remarks/>
         public event CreateArticleCompletedEventHandler CreateArticleCompleted;
+        
+        /// <remarks/>
+        public event AcceptArticleCompletedEventHandler AcceptArticleCompleted;
+        
+        /// <remarks/>
+        public event RejectArticleCompletedEventHandler RejectArticleCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/DoWork", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -182,6 +192,94 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/AcceptArticle", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AcceptArticle(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId) {
+            this.Invoke("AcceptArticle", new object[] {
+                        articleTitle,
+                        articleContent,
+                        articleComment,
+                        articlePublishDate,
+                        userId,
+                        mediaManagerId,
+                        articleStatusId,
+                        articleStateId,
+                        articleId});
+        }
+        
+        /// <remarks/>
+        public void AcceptArticleAsync(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId) {
+            this.AcceptArticleAsync(articleTitle, articleContent, articleComment, articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId, null);
+        }
+        
+        /// <remarks/>
+        public void AcceptArticleAsync(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId, object userState) {
+            if ((this.AcceptArticleOperationCompleted == null)) {
+                this.AcceptArticleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAcceptArticleOperationCompleted);
+            }
+            this.InvokeAsync("AcceptArticle", new object[] {
+                        articleTitle,
+                        articleContent,
+                        articleComment,
+                        articlePublishDate,
+                        userId,
+                        mediaManagerId,
+                        articleStatusId,
+                        articleStateId,
+                        articleId}, this.AcceptArticleOperationCompleted, userState);
+        }
+        
+        private void OnAcceptArticleOperationCompleted(object arg) {
+            if ((this.AcceptArticleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AcceptArticleCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/RejectArticle", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RejectArticle(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId) {
+            this.Invoke("RejectArticle", new object[] {
+                        articleTitle,
+                        articleContent,
+                        articleComment,
+                        articlePublishDate,
+                        userId,
+                        mediaManagerId,
+                        articleStatusId,
+                        articleStateId,
+                        articleId});
+        }
+        
+        /// <remarks/>
+        public void RejectArticleAsync(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId) {
+            this.RejectArticleAsync(articleTitle, articleContent, articleComment, articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId, null);
+        }
+        
+        /// <remarks/>
+        public void RejectArticleAsync(string articleTitle, string articleContent, string articleComment, System.DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId, object userState) {
+            if ((this.RejectArticleOperationCompleted == null)) {
+                this.RejectArticleOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRejectArticleOperationCompleted);
+            }
+            this.InvokeAsync("RejectArticle", new object[] {
+                        articleTitle,
+                        articleContent,
+                        articleComment,
+                        articlePublishDate,
+                        userId,
+                        mediaManagerId,
+                        articleStatusId,
+                        articleStateId,
+                        articleId}, this.RejectArticleOperationCompleted, userState);
+        }
+        
+        private void OnRejectArticleOperationCompleted(object arg) {
+            if ((this.RejectArticleCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RejectArticleCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -233,6 +331,14 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
     public delegate void CreateArticleCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
+    public delegate void AcceptArticleCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
+    public delegate void RejectArticleCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

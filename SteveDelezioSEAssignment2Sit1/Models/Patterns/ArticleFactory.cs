@@ -13,6 +13,16 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
         public virtual void CreateArticle(){
 
         }
+
+        public virtual void AcceptArticle()
+        {
+            
+        }
+
+        public virtual void RejectArticle()
+        {
+            
+        }
         public virtual void UpdateArticle()
         {
 

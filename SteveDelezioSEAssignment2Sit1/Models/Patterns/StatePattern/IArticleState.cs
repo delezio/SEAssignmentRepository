@@ -12,6 +12,11 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern
 
         void CreateArticle(string articleTitle, string articleContent, string articleComment,
             DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId);
+        void AcceptArticle(string articleTitle, string articleContent, string articleComment,
+           DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId);
+
+        void RejectArticle(string articleTitle, string articleContent, string articleComment,
+          DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId);
 
     }
 }

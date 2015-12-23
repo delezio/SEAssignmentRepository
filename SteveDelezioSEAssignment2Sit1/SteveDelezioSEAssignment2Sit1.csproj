@@ -132,6 +132,7 @@
     <Compile Include="Models\Patterns\FacebookArticle.cs" />
     <Compile Include="Models\Patterns\PublishToAll.cs" />
     <Compile Include="Models\Patterns\StatePattern\NewArticleState.cs" />
+    <Compile Include="Models\Patterns\StatePattern\ReviewByWriterArticleState.cs" />
     <Compile Include="Models\Patterns\TextArticle.cs" />
     <Compile Include="Models\Patterns\TwitterArticle.cs" />
     <Compile Include="Models\Patterns\VideoArticle.cs" />
@@ -248,16 +249,19 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
-    <None Include="Web References\MyService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <Content Include="Views\Articles\ListOfArticlesForReviewByOtherWriter.cshtml" />
+    <Content Include="Views\Users\Logout.cshtml" />
+    <Content Include="Views\Articles\ReviewByWriter.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Articles\CreateArticle.cshtml" />
+    <None Include="Web References\MyService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\MyService\ServiceManager.wsdl" />
   </ItemGroup>
   <ItemGroup>

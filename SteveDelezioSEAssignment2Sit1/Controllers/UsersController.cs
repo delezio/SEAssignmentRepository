@@ -15,7 +15,13 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
     {
         private DataContext db = new DataContext();
         MyService.ServiceManager ms = new MyService.ServiceManager();
-        
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            Session.Clear();
+            return RedirectToAction("index", "home");
+        }
         public ActionResult Login()
         {
             return View();
