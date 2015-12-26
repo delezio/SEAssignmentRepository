@@ -80,6 +80,70 @@
       <xs:element name="RejectArticleResponse">
         <xs:complexType />
       </xs:element>
+      <xs:element name="UpdateArticle">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="articleTitle" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleContent" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleComment" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articlePublishDate" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" name="userId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="mediaManagerId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStatusId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStateId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UpdateArticleResponse">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="DeleteArticle">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="ArticleId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DeleteArticleResponse">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="AcceptArticleMediaManager">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="articleTitle" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleContent" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleComment" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articlePublishDate" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" name="userId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="mediaManagerId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStatusId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStateId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcceptArticleMediaManagerResponse">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="RejectArticleMediaManager">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="articleTitle" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleContent" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="articleComment" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articlePublishDate" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" name="userId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="mediaManagerId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStatusId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleStateId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="articleId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RejectArticleMediaManagerResponse">
+        <xs:complexType />
+      </xs:element>
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IServiceManager_DoWork_InputMessage">
@@ -112,6 +176,30 @@
   <wsdl:message name="IServiceManager_RejectArticle_OutputMessage">
     <wsdl:part name="parameters" element="tns:RejectArticleResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceManager_UpdateArticle_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateArticle" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_UpdateArticle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateArticleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_DeleteArticle_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteArticle" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_DeleteArticle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteArticleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_AcceptArticleMediaManager_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptArticleMediaManager" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_AcceptArticleMediaManager_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptArticleMediaManagerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_RejectArticleMediaManager_InputMessage">
+    <wsdl:part name="parameters" element="tns:RejectArticleMediaManager" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_RejectArticleMediaManager_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RejectArticleMediaManagerResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceManager">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DoWork" message="tns:IServiceManager_DoWork_InputMessage" />
@@ -132,6 +220,22 @@
     <wsdl:operation name="RejectArticle">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/RejectArticle" message="tns:IServiceManager_RejectArticle_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/RejectArticleResponse" message="tns:IServiceManager_RejectArticle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateArticle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/UpdateArticle" message="tns:IServiceManager_UpdateArticle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/UpdateArticleResponse" message="tns:IServiceManager_UpdateArticle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteArticle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DeleteArticle" message="tns:IServiceManager_DeleteArticle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/DeleteArticleResponse" message="tns:IServiceManager_DeleteArticle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptArticleMediaManager">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/AcceptArticleMediaManager" message="tns:IServiceManager_AcceptArticleMediaManager_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/AcceptArticleMediaManagerResponse" message="tns:IServiceManager_AcceptArticleMediaManager_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectArticleMediaManager">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/RejectArticleMediaManager" message="tns:IServiceManager_RejectArticleMediaManager_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/RejectArticleMediaManagerResponse" message="tns:IServiceManager_RejectArticleMediaManager_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceManager" type="tns:IServiceManager">
@@ -174,6 +278,42 @@
     </wsdl:operation>
     <wsdl:operation name="RejectArticle">
       <soap:operation soapAction="http://tempuri.org/IServiceManager/RejectArticle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateArticle">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/UpdateArticle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteArticle">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/DeleteArticle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcceptArticleMediaManager">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/AcceptArticleMediaManager" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RejectArticleMediaManager">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/RejectArticleMediaManager" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

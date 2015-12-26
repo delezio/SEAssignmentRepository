@@ -132,6 +132,7 @@
     <Compile Include="Models\Patterns\FacebookArticle.cs" />
     <Compile Include="Models\Patterns\PublishToAll.cs" />
     <Compile Include="Models\Patterns\StatePattern\NewArticleState.cs" />
+    <Compile Include="Models\Patterns\StatePattern\ReviewByMediaManagerState.cs" />
     <Compile Include="Models\Patterns\StatePattern\ReviewByWriterArticleState.cs" />
     <Compile Include="Models\Patterns\TextArticle.cs" />
     <Compile Include="Models\Patterns\TwitterArticle.cs" />
@@ -165,6 +166,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Roles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_StateWorkflows.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Users.cs">
@@ -258,6 +262,11 @@
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Articles\CreateArticle.cshtml" />
+    <Content Include="Views\Articles\ListOfOwnArticlesThatWereRejected.cshtml" />
+    <Content Include="Views\Articles\UpdateArticle.cshtml" />
+    <Content Include="Views\Articles\DeleteArticle.cshtml" />
+    <Content Include="Views\Articles\ReviewByMediaManager.cshtml" />
+    <Content Include="Views\Articles\ListOfArticlesForReviewByMediaManager.cshtml" />
     <None Include="Web References\MyService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

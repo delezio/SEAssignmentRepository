@@ -48,29 +48,116 @@ namespace SteveDelezioSEAssignment2Sit1
 
         }
         public void AcceptArticle(string articleTitle, string articleContent, string articleComment,
-           DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId,int articleId)
+           DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId)
         {
-            Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByWriterArticleState");
+            string currentStateName =
+    db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
+            if (currentStateName == null) throw new ArgumentNullException("currentStateName");
+            string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
+            Type s = Type.GetType(fullstringtype);
+            //   Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByWriterArticleState");
             //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
             // (IArticleState)s.GetConstructor()
 
             ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
-                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId,articleId);
+                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
             af.AcceptArticle();
 
         }
         public void RejectArticle(string articleTitle, string articleContent, string articleComment,
-           DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId,int articleId)
+           DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId)
         {
             // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState.cs");
             //string state =db.tbl_Articles.SingleOrDefault(x => x.ArticleId == 1).tbl_ArticleStates.StateName;
             // string fullname = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + state;
-            Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByWriterArticleState");
+            string currentStateName =
+    db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
+            if (currentStateName == null) throw new ArgumentNullException("currentStateName");
+            string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
+            Type s = Type.GetType(fullstringtype);
+            //  Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByWriterArticleState");
             //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
             // (IArticleState)s.GetConstructor()
 
             ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
-                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId,articleId);
+                articlePublishDate, userId, mediaManagerId, articleStatusId, 1, articleId);
+            af.RejectArticle();
+
+        }
+        public void UpdateArticle(string articleTitle, string articleContent, string articleComment,
+         DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId)
+        {
+            // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState.cs");
+            //string state =db.tbl_Articles.SingleOrDefault(x => x.ArticleId == 1).tbl_ArticleStates.StateName;
+            // string fullname = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + state;
+            string currentStateName =
+              db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
+            if (currentStateName == null) throw new ArgumentNullException("currentStateName");
+            string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
+            Type s = Type.GetType(fullstringtype);
+            //Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
+            //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
+            // (IArticleState)s.GetConstructor()
+
+            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
+            af.UpdateArticle();
+
+        }
+
+        public void DeleteArticle(int articleId)
+        {
+            string currentStateName =
+                db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
+            if (currentStateName == null) throw new ArgumentNullException("currentStateName");
+            string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
+            Type s = Type.GetType(fullstringtype);
+            // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
+            //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
+            // (IArticleState)s.GetConstructor()
+            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleId);
+            af.DeleteArticle();
+        }
+
+
+
+
+
+
+        public void AcceptArticleMediaManager(string articleTitle, string articleContent, string articleComment,
+   DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId)
+        {
+            string currentStateName =
+    db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
+            if (currentStateName == null) throw new ArgumentNullException("currentStateName");
+            string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
+            Type s = Type.GetType(fullstringtype);
+            // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByMediaManagerState");
+            //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
+            // (IArticleState)s.GetConstructor()
+            
+            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
+            af.AcceptArticle();
+
+        }
+        public void RejectArticleMediaManager(string articleTitle, string articleContent, string articleComment,
+           DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId)
+        {
+            // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState.cs");
+            //string state =db.tbl_Articles.SingleOrDefault(x => x.ArticleId == 1).tbl_ArticleStates.StateName;
+            // string fullname = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + state;
+            string currentStateName =
+    db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
+            if (currentStateName == null) throw new ArgumentNullException("currentStateName");
+            string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
+            Type s = Type.GetType(fullstringtype);
+            // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern..ReviewByMediaManagerState");
+            //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
+            // (IArticleState)s.GetConstructor()
+
+            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+                articlePublishDate, userId, mediaManagerId, articleStatusId, 1, articleId);
             af.RejectArticle();
 
         }

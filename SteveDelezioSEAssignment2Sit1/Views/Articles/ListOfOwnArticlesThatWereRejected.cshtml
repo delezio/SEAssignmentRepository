@@ -1,11 +1,14 @@
 ﻿@model IEnumerable<SteveDelezioSEAssignment2Sit1.Models.tbl_Articles>
 
 @{
-    ViewBag.Title = "ListOfArticlesForReviewByOtherWriter";
+    ViewBag.Title = "ListOfOwnArticlesThatWereRejected";
 }
 
-<h2>ListOfArticlesForReviewByOtherWriter</h2>
+<h2>ListOfOwnArticlesThatWereRejected</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -62,7 +65,8 @@
             @Html.DisplayFor(modelItem => item.tbl_ArticleStates.StateName)
         </td>*@
         <td>
-            @Html.ActionLink("Review", "ReviewByWriter", new { id=item.ArticleId }) |
+            @Html.ActionLink("Update Article", "UpdateArticle", new { id=item.ArticleId }) |
+            @Html.ActionLink("Delete Article", "DeleteArticle", new { id=item.ArticleId })
         </td>
     </tr>
 }

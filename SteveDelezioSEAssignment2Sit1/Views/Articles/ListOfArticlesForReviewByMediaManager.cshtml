@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SteveDelezioSEAssignment2Sit1.Models.tbl_Articles>
+
+@{
+    ViewBag.Title = "ListOfArticlesForReviewByMediaManager";
+}
+
+<h2>ListOfArticlesForReviewByMediaManager</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticlePublishDateTime)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ArticleMediaManagerId)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_Users.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_ArticleStatuses.ArticleStatusName)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.tbl_ArticleStates.StateName)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleComments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticlePublishDateTime)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ArticleMediaManagerId)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_Users.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_ArticleStatuses.ArticleStatusName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.tbl_ArticleStates.StateName)
+                </td>*@
+            <td>
+                @Html.ActionLink("Review", "ReviewByMediaManager", new { id = item.ArticleId }) |
+            </td>
+        </tr>
+    }
+
+</table>

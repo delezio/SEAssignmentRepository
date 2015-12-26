@@ -49,6 +49,11 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
         {
             this.state = state;
         }
+        public TextArticle(IArticleState state,int articleId)
+        {
+            this.state = state;
+            this.articleId = articleId;
+        }
         public TextArticle()
         {
         }
@@ -75,10 +80,13 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
         public override void UpdateArticle()
         {
             base.UpdateArticle();
+            state.UpdateArticle(articleTitle, articleContent, articleComment, articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
+
         }
         public override void DeleteArticle()
         {
             base.DeleteArticle();
+            state.DeleteArticle(articleId);
         }
     }
 }

@@ -44,6 +44,8 @@ public partial class DataContext : DbContext
 
     public DbSet<tbl_ArticleStates> tbl_ArticleStates { get; set; }
 
+    public DbSet<tbl_StateWorkflows> tbl_StateWorkflows { get; set; }
+
 }
 
 }

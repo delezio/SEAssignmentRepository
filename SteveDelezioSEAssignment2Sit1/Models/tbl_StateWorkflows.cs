@@ -15,28 +15,20 @@ namespace SteveDelezioSEAssignment2Sit1.Models
 using System;
     using System.Collections.Generic;
     
-public partial class tbl_ArticleStates
+public partial class tbl_StateWorkflows
 {
 
-    public tbl_ArticleStates()
-    {
+    public int WorflowPositionId { get; set; }
 
-        this.tbl_Articles = new HashSet<tbl_Articles>();
-
-        this.tbl_StateWorkflows = new HashSet<tbl_StateWorkflows>();
-
-    }
-
+    public int UserId { get; set; }
 
     public int StateId { get; set; }
 
-    public string StateName { get; set; }
 
 
+    public virtual tbl_ArticleStates tbl_ArticleStates { get; set; }
 
-    public virtual ICollection<tbl_Articles> tbl_Articles { get; set; }
-
-    public virtual ICollection<tbl_StateWorkflows> tbl_StateWorkflows { get; set; }
+    public virtual tbl_Users tbl_Users { get; set; }
 
 }
 

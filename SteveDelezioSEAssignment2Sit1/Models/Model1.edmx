@@ -50,6 +50,16 @@
           <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_StateWorkflows">
+          <Key>
+            <PropertyRef Name="WorflowPositionId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="WorflowPositionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_Users">
           <Key>
             <PropertyRef Name="UserId" />
@@ -97,6 +107,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbl_StateWorkflows_tbl_ArticleStates">
+          <End Role="tbl_ArticleStates" Type="Self.tbl_ArticleStates" Multiplicity="1" />
+          <End Role="tbl_StateWorkflows" Type="Self.tbl_StateWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ArticleStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tbl_StateWorkflows">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_StateWorkflows_tbl_Users">
+          <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="1" />
+          <End Role="tbl_StateWorkflows" Type="Self.tbl_StateWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tbl_StateWorkflows">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbl_Users_tbl_Roles">
           <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="1" />
           <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="*" />
@@ -115,6 +149,7 @@
           <EntitySet Name="tbl_ArticleStates" EntityType="Self.tbl_ArticleStates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_ArticleStatuses" EntityType="Self.tbl_ArticleStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_StateWorkflows" EntityType="Self.tbl_StateWorkflows" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tbl_Articles_tbl_ArticleStates" Association="Self.FK_tbl_Articles_tbl_ArticleStates">
             <End Role="tbl_ArticleStates" EntitySet="tbl_ArticleStates" />
@@ -127,6 +162,14 @@
           <AssociationSet Name="FK_tbl_Articles_tbl_Users" Association="Self.FK_tbl_Articles_tbl_Users">
             <End Role="tbl_Users" EntitySet="tbl_Users" />
             <End Role="tbl_Articles" EntitySet="tbl_Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_StateWorkflows_tbl_ArticleStates" Association="Self.FK_tbl_StateWorkflows_tbl_ArticleStates">
+            <End Role="tbl_ArticleStates" EntitySet="tbl_ArticleStates" />
+            <End Role="tbl_StateWorkflows" EntitySet="tbl_StateWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_StateWorkflows_tbl_Users" Association="Self.FK_tbl_StateWorkflows_tbl_Users">
+            <End Role="tbl_Users" EntitySet="tbl_Users" />
+            <End Role="tbl_StateWorkflows" EntitySet="tbl_StateWorkflows" />
           </AssociationSet>
           <AssociationSet Name="FK_tbl_Users_tbl_Roles" Association="Self.FK_tbl_Users_tbl_Roles">
             <End Role="tbl_Roles" EntitySet="tbl_Roles" />
@@ -192,6 +235,7 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_Articles" Relationship="Self.FK_tbl_Articles_tbl_Users" FromRole="tbl_Users" ToRole="tbl_Articles" />
           <NavigationProperty Name="tbl_Roles" Relationship="Self.FK_tbl_Users_tbl_Roles" FromRole="tbl_Users" ToRole="tbl_Roles" />
+          <NavigationProperty Name="tbl_StateWorkflows" Relationship="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_Users" FromRole="tbl_Users" ToRole="tbl_StateWorkflows" />
         </EntityType>
         <Association Name="FK_tbl_Articles_tbl_Users">
           <End Role="tbl_Users" Type="Self.tbl_Users" Multiplicity="1" />
@@ -240,6 +284,15 @@
             <End Role="tbl_ArticleStates" EntitySet="tbl_ArticleStates" />
             <End Role="tbl_Articles" EntitySet="tbl_Articles" />
           </AssociationSet>
+          <EntitySet Name="tbl_StateWorkflows" EntityType="SEAssignment2Sit1Model.tbl_StateWorkflows" />
+          <AssociationSet Name="FK_tbl_StateWorkflows_tbl_ArticleStates" Association="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_ArticleStates">
+            <End Role="tbl_ArticleStates" EntitySet="tbl_ArticleStates" />
+            <End Role="tbl_StateWorkflows" EntitySet="tbl_StateWorkflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_StateWorkflows_tbl_Users" Association="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_Users">
+            <End Role="tbl_Users" EntitySet="tbl_Users" />
+            <End Role="tbl_StateWorkflows" EntitySet="tbl_StateWorkflows" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_tbl_Articles_tbl_ArticleStatuses">
           <End Type="SEAssignment2Sit1Model.tbl_ArticleStatuses" Role="tbl_ArticleStatuses" Multiplicity="1" />
@@ -260,6 +313,7 @@
           <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbl_Articles" Relationship="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStates" FromRole="tbl_ArticleStates" ToRole="tbl_Articles" />
+          <NavigationProperty Name="tbl_StateWorkflows" Relationship="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_ArticleStates" FromRole="tbl_ArticleStates" ToRole="tbl_StateWorkflows" />
         </EntityType>
         <Association Name="FK_tbl_Articles_tbl_ArticleStates">
           <End Type="SEAssignment2Sit1Model.tbl_ArticleStates" Role="tbl_ArticleStates" Multiplicity="1" />
@@ -270,6 +324,42 @@
             </Principal>
             <Dependent Role="tbl_Articles">
               <PropertyRef Name="ArticleStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_StateWorkflows">
+          <Key>
+            <PropertyRef Name="WorflowPositionId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="WorflowPositionId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_ArticleStates" Relationship="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_ArticleStates" FromRole="tbl_StateWorkflows" ToRole="tbl_ArticleStates" />
+          <NavigationProperty Name="tbl_Users" Relationship="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_Users" FromRole="tbl_StateWorkflows" ToRole="tbl_Users" />
+        </EntityType>
+        <Association Name="FK_tbl_StateWorkflows_tbl_ArticleStates">
+          <End Type="SEAssignment2Sit1Model.tbl_ArticleStates" Role="tbl_ArticleStates" Multiplicity="1" />
+          <End Type="SEAssignment2Sit1Model.tbl_StateWorkflows" Role="tbl_StateWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_ArticleStates">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tbl_StateWorkflows">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_StateWorkflows_tbl_Users">
+          <End Type="SEAssignment2Sit1Model.tbl_Users" Role="tbl_Users" Multiplicity="1" />
+          <End Type="SEAssignment2Sit1Model.tbl_StateWorkflows" Role="tbl_StateWorkflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tbl_StateWorkflows">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -338,6 +428,15 @@
               <MappingFragment StoreEntitySet="tbl_ArticleStates">
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_StateWorkflows">
+            <EntityTypeMapping TypeName="SEAssignment2Sit1Model.tbl_StateWorkflows">
+              <MappingFragment StoreEntitySet="tbl_StateWorkflows">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="WorflowPositionId" ColumnName="WorflowPositionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -27,5 +27,23 @@ namespace SteveDelezioSEAssignment2Sit1
         [XmlSerializerFormat]
         void RejectArticle(string articleTitle, string articleContent, string articleComment, DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId,int articleId);
 
+        [OperationContract]
+        [XmlSerializerFormat]
+        void UpdateArticle(string articleTitle, string articleContent, string articleComment, DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId);
+
+        [OperationContract]
+        [XmlSerializerFormat]
+        void DeleteArticle(int ArticleId);
+        [OperationContract]
+        [XmlSerializerFormat]
+       void AcceptArticleMediaManager(string articleTitle, string articleContent, string articleComment,
+            DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId,
+            int articleId);
+        [OperationContract]
+        [XmlSerializerFormat]
+        void RejectArticleMediaManager(string articleTitle, string articleContent, string articleComment,
+            DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId,
+            int articleId);
+
     }
 }

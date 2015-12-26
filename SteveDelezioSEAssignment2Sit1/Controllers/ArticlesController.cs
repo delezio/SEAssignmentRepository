@@ -58,7 +58,24 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             {
                 if (checkResp)
                 {
-                    ms.AcceptArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime,tbl_Articles.UserId,tbl_Articles.ArticleMediaManagerId,1,tbl_Articles.ArticleStateId,tbl_Articles.ArticleId);
+                     tbl_Users currentUser = db.tbl_Users.SingleOrDefault(x => x.Username == HttpContext.User.Identity.Name);
+                    var singleOrDefault = db.tbl_StateWorkflows.SingleOrDefault(
+                        x => x.UserId == currentUser.UserId && x.StateId == tbl_Articles.ArticleStateId);
+                    if (singleOrDefault != null)
+                    {
+                        int Workflowposition = singleOrDefault.WorflowPositionId;
+                        var tblStateWorkflows = db.tbl_StateWorkflows.SingleOrDefault(
+                            x => x.WorflowPositionId == Workflowposition + 1 && x.UserId == currentUser.UserId);
+                        if (tblStateWorkflows != null)
+                        {
+                            int nextState =
+                                tblStateWorkflows.StateId;
+                            ms.AcceptArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent,
+                                tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId,
+                                tbl_Articles.ArticleMediaManagerId, 1, nextState,
+                                tbl_Articles.ArticleId);
+                        }
+                    }
                 }
                 else
                 {
@@ -75,6 +92,145 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             return View(tbl_Articles);
         }
 
+
+        [Authorize(Roles = "MediaManager")]
+        public ActionResult ListOfArticlesForReviewByMediaManager()
+        {
+            int userIdFromDb = db.tbl_Users.Single(y => y.Username == HttpContext.User.Identity.Name).UserId;
+            var tbl_Articles = db.tbl_Articles.Include(t => t.tbl_Users).Include(t => t.tbl_ArticleStatuses).Where(x => x.UserId != userIdFromDb && x.tbl_ArticleStatuses.ArticleStatusId == 1 && x.ArticleMediaManagerId==userIdFromDb);
+            return View(tbl_Articles.ToList());
+        }
+        public ActionResult ReviewByMediaManager(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_Articles tbl_Articles = db.tbl_Articles.Find(id);
+            if (tbl_Articles == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
+            ViewBag.ArticleStateId = new SelectList(db.tbl_ArticleStates, "StateId", "StateName",
+                tbl_Articles.ArticleStateId);
+            return View(tbl_Articles);
+        }
+
+        // POST: Articles/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReviewByMediaManager([Bind(Include = "ArticleId,ArticleTitle,ArticleContent,ArticleComments,ArticlePublishDateTime,UserId,ArticleMediaManagerId,ArticleStatusId,ArticleStateId")] tbl_Articles tbl_Articles, bool checkResp = false)
+        {
+            if (ModelState.IsValid)
+            {
+                if (checkResp)
+                {
+                    tbl_Users currentUser = db.tbl_Users.SingleOrDefault(x => x.Username == HttpContext.User.Identity.Name);
+                    var singleOrDefault = db.tbl_StateWorkflows.SingleOrDefault(
+                        x => x.UserId == currentUser.UserId && x.StateId == tbl_Articles.ArticleStateId);
+                    if (singleOrDefault != null)
+                    {
+                        int Workflowposition= singleOrDefault.WorflowPositionId;
+                        var tblStateWorkflows = db.tbl_StateWorkflows.SingleOrDefault(
+                            x => x.WorflowPositionId == Workflowposition + 1 && x.UserId == currentUser.UserId);
+                        if (tblStateWorkflows != null)
+                        {
+                            int nextState =
+                                tblStateWorkflows.StateId;
+                            ms.AcceptArticleMediaManager(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId, 3, nextState, tbl_Articles.ArticleId);
+                        }
+                    }
+                }
+                else
+                {
+                    ms.RejectArticleMediaManager(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId, 4, tbl_Articles.ArticleStateId, tbl_Articles.ArticleId);
+                }
+                // db.Entry(tbl_Articles).State = EntityState.Modified;
+                //  db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
+            ViewBag.ArticleStateId = new SelectList(db.tbl_ArticleStates, "StateId", "StateName",
+    tbl_Articles.ArticleStateId);
+            return View(tbl_Articles);
+        }
+
+
+        [Authorize(Roles = "Writer")]
+        public ActionResult ListOfOwnArticlesThatWereRejected()
+        {
+            int userIdFromDb = db.tbl_Users.Single(y => y.Username == HttpContext.User.Identity.Name).UserId;
+            var tbl_Articles = db.tbl_Articles.Include(t => t.tbl_Users).Include(t => t.tbl_ArticleStatuses).Where(x => x.UserId == userIdFromDb && x.tbl_ArticleStatuses.ArticleStatusId == 2 || x.tbl_ArticleStatuses.ArticleStatusId==4);
+            return View(tbl_Articles.ToList());
+        }
+
+        public ActionResult UpdateArticle(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_Articles tbl_Articles = db.tbl_Articles.Find(id);
+            if (tbl_Articles == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
+            ViewBag.ArticleMediaManagerId = new SelectList(db.tbl_Users.Where(x => x.RoleId == 2), "UserId", "Username");
+            return View(tbl_Articles);
+        }
+
+        // POST: Articles/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateArticle([Bind(Include = "ArticleId,ArticleTitle,ArticleContent,ArticleComments,ArticlePublishDateTime,UserId,ArticleMediaManagerId,ArticleStatusId")] tbl_Articles tbl_Articles)
+        {
+            if (ModelState.IsValid)
+            {
+                ms.UpdateArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, "",
+                    tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId, 5, 1,
+                    tbl_Articles.ArticleId);
+                //db.Entry(tbl_Articles).State = EntityState.Modified;
+               // db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
+            ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
+            ViewBag.ArticleMediaManagerId = new SelectList(db.tbl_Users.Where(x => x.RoleId == 2), "UserId", "Username");
+            return View(tbl_Articles);
+        }
+
+
+        public ActionResult DeleteArticle(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_Articles tbl_Articles = db.tbl_Articles.Find(id);
+            if (tbl_Articles == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_Articles);
+        }
+
+        // POST: Articles/Delete/5
+        [HttpPost, ActionName("DeleteArticle")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteArticleConfirmed(int id)
+        {
+          ms.DeleteArticle(id);
+            return RedirectToAction("Index");
+        }
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
@@ -119,7 +275,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         public ActionResult CreateArticle()
         {
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username");
-            ViewBag.MediaManagerId = new SelectList(db.tbl_Users.Where(x=>x.RoleId==2), "UserId", "Username");
+            ViewBag.ArticleMediaManagerId = new SelectList(db.tbl_Users.Where(x=>x.RoleId==2), "UserId", "Username");
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName");
             return View();
         }
@@ -135,7 +291,12 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             {
                 tbl_Articles.ArticleComments = "";
                 tbl_Articles.UserId = db.tbl_Users.SingleOrDefault(x=>x.Username==HttpContext.User.Identity.Name).UserId;
-                tbl_Articles.ArticleStateId = 1;
+                tbl_ArticleStates ast  =
+                    db.tbl_ArticleStates.SingleOrDefault(x => x.StateName == "ReviewByWriterArticleState");
+                tbl_StateWorkflows getFlow =
+                    db.tbl_StateWorkflows.SingleOrDefault(
+                        x => x.UserId == tbl_Articles.UserId && x.StateId==ast.StateId);
+                if (getFlow != null) tbl_Articles.ArticleStateId = getFlow.StateId;
                 tbl_Articles.ArticleStatusId = 5;
                 ms.CreateArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments,
                     tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId,
@@ -147,7 +308,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             }
 
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
-            ViewBag.MediaManagerId = new SelectList(db.tbl_Users.Where(x => x.RoleId == 2), "UserId", "Username");
+            ViewBag.ArticleMediaManagerId = new SelectList(db.tbl_Users.Where(x => x.RoleId == 2), "UserId", "Username");
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
             return View(tbl_Articles);
         }

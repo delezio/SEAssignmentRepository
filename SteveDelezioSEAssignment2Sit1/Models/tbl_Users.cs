@@ -23,6 +23,8 @@ public partial class tbl_Users
 
         this.tbl_Articles = new HashSet<tbl_Articles>();
 
+        this.tbl_StateWorkflows = new HashSet<tbl_StateWorkflows>();
+
     }
 
 
@@ -43,6 +45,8 @@ public partial class tbl_Users
     public virtual ICollection<tbl_Articles> tbl_Articles { get; set; }
 
     public virtual tbl_Roles tbl_Roles { get; set; }
+
+    public virtual ICollection<tbl_StateWorkflows> tbl_StateWorkflows { get; set; }
 
 }
 
