@@ -144,6 +144,34 @@
       <xs:element name="RejectArticleMediaManagerResponse">
         <xs:complexType />
       </xs:element>
+      <xs:element name="DoesUsernameExist">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="username" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DoesUsernameExistResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="DoesUsernameExistResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RegisterUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="username" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="password" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="firstName" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="surname" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="roleId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RegisterUserResponse">
+        <xs:complexType />
+      </xs:element>
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IServiceManager_DoWork_InputMessage">
@@ -200,6 +228,18 @@
   <wsdl:message name="IServiceManager_RejectArticleMediaManager_OutputMessage">
     <wsdl:part name="parameters" element="tns:RejectArticleMediaManagerResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceManager_DoesUsernameExist_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoesUsernameExist" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_DoesUsernameExist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoesUsernameExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceManager">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DoWork" message="tns:IServiceManager_DoWork_InputMessage" />
@@ -236,6 +276,14 @@
     <wsdl:operation name="RejectArticleMediaManager">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/RejectArticleMediaManager" message="tns:IServiceManager_RejectArticleMediaManager_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/RejectArticleMediaManagerResponse" message="tns:IServiceManager_RejectArticleMediaManager_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoesUsernameExist">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DoesUsernameExist" message="tns:IServiceManager_DoesUsernameExist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/DoesUsernameExistResponse" message="tns:IServiceManager_DoesUsernameExist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/RegisterUser" message="tns:IServiceManager_RegisterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/RegisterUserResponse" message="tns:IServiceManager_RegisterUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceManager" type="tns:IServiceManager">
@@ -314,6 +362,24 @@
     </wsdl:operation>
     <wsdl:operation name="RejectArticleMediaManager">
       <soap:operation soapAction="http://tempuri.org/IServiceManager/RejectArticleMediaManager" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoesUsernameExist">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/DoesUsernameExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/RegisterUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

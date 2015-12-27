@@ -8,25 +8,51 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header" style="position: absolute;
+                                      right: 0; font-size: 10px;">
+            <ul class=" nav navbar-nav">
+                @Html.Label(HttpContext.Current.User.Identity.Name)
+                @if (HttpContext.Current.User.Identity.Name == "")
+                {
+
+                    <li>@Html.ActionLink("Login", "Login", "Users")</li>
+                    <li>@Html.ActionLink("Register", "Register", "Users")</li>
+                }
+                @if (HttpContext.Current.User.Identity.Name != "")
+                {
+                    <li>@Html.ActionLink("Log Out", "Logout", "Users")</li>
+                }
+            </ul>
+        </div>
+        <br/>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Article Management", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @if (HttpContext.Current.User.IsInRole("Writer"))
+                {
+                    <li>@Html.ActionLink("Create Article", "CreateArticle", "Articles")</li>
+                    <li>@Html.ActionLink("Review Articles", "ListOfArticlesForReviewByOtherWriter", "Articles")</li>
+                    <li>@Html.ActionLink("My Rejected Articles", "ListOfOwnArticlesThatWereRejected", "Articles")</li>
+                }
+                @if (HttpContext.Current.User.IsInRole("MediaManager"))
+                {
+                    <li>@Html.ActionLink("Review Articles", "ListOfArticlesForReviewByMediaManager", "Articles")</li>
+
+                }
+            </ul>
         </div>
     </div>
+</div>
+<br/>
     <div class="container body-content">
         @RenderBody()
         <hr />

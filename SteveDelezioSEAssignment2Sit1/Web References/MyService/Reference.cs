@@ -47,6 +47,10 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         private System.Threading.SendOrPostCallback RejectArticleMediaManagerOperationCompleted;
         
+        private System.Threading.SendOrPostCallback DoesUsernameExistOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RegisterUserOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -111,6 +115,12 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         /// <remarks/>
         public event RejectArticleMediaManagerCompletedEventHandler RejectArticleMediaManagerCompleted;
+        
+        /// <remarks/>
+        public event DoesUsernameExistCompletedEventHandler DoesUsernameExistCompleted;
+        
+        /// <remarks/>
+        public event RegisterUserCompletedEventHandler RegisterUserCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/DoWork", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -460,6 +470,71 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/DoesUsernameExist", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool DoesUsernameExist(string username) {
+            object[] results = this.Invoke("DoesUsernameExist", new object[] {
+                        username});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void DoesUsernameExistAsync(string username) {
+            this.DoesUsernameExistAsync(username, null);
+        }
+        
+        /// <remarks/>
+        public void DoesUsernameExistAsync(string username, object userState) {
+            if ((this.DoesUsernameExistOperationCompleted == null)) {
+                this.DoesUsernameExistOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDoesUsernameExistOperationCompleted);
+            }
+            this.InvokeAsync("DoesUsernameExist", new object[] {
+                        username}, this.DoesUsernameExistOperationCompleted, userState);
+        }
+        
+        private void OnDoesUsernameExistOperationCompleted(object arg) {
+            if ((this.DoesUsernameExistCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DoesUsernameExistCompleted(this, new DoesUsernameExistCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/RegisterUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RegisterUser(string username, string password, string firstName, string surname, int roleId) {
+            this.Invoke("RegisterUser", new object[] {
+                        username,
+                        password,
+                        firstName,
+                        surname,
+                        roleId});
+        }
+        
+        /// <remarks/>
+        public void RegisterUserAsync(string username, string password, string firstName, string surname, int roleId) {
+            this.RegisterUserAsync(username, password, firstName, surname, roleId, null);
+        }
+        
+        /// <remarks/>
+        public void RegisterUserAsync(string username, string password, string firstName, string surname, int roleId, object userState) {
+            if ((this.RegisterUserOperationCompleted == null)) {
+                this.RegisterUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRegisterUserOperationCompleted);
+            }
+            this.InvokeAsync("RegisterUser", new object[] {
+                        username,
+                        password,
+                        firstName,
+                        surname,
+                        roleId}, this.RegisterUserOperationCompleted, userState);
+        }
+        
+        private void OnRegisterUserOperationCompleted(object arg) {
+            if ((this.RegisterUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RegisterUserCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -535,6 +610,36 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
     public delegate void RejectArticleMediaManagerCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
+    public delegate void DoesUsernameExistCompletedEventHandler(object sender, DoesUsernameExistCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DoesUsernameExistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DoesUsernameExistCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
+    public delegate void RegisterUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

@@ -79,7 +79,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                 }
                 else
                 {
-                    ms.RejectArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId,2, tbl_Articles.ArticleStateId, tbl_Articles.ArticleId);
+                    ms.RejectArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId,2,2, tbl_Articles.ArticleId);
                 }
                // db.Entry(tbl_Articles).State = EntityState.Modified;
               //  db.SaveChanges();
@@ -147,7 +147,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                 }
                 else
                 {
-                    ms.RejectArticleMediaManager(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId, 4, tbl_Articles.ArticleStateId, tbl_Articles.ArticleId);
+                    ms.RejectArticleMediaManager(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments, tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId, 4, 2, tbl_Articles.ArticleId);
                 }
                 // db.Entry(tbl_Articles).State = EntityState.Modified;
                 //  db.SaveChanges();

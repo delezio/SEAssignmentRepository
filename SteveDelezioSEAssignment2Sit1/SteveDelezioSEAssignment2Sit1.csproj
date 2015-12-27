@@ -267,6 +267,7 @@
     <Content Include="Views\Articles\DeleteArticle.cshtml" />
     <Content Include="Views\Articles\ReviewByMediaManager.cshtml" />
     <Content Include="Views\Articles\ListOfArticlesForReviewByMediaManager.cshtml" />
+    <Content Include="Views\Users\Register.cshtml" />
     <None Include="Web References\MyService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

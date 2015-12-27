@@ -20,7 +20,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();
             Session.Clear();
-            return RedirectToAction("index", "home");
+            return RedirectToAction("Login", "users");
         }
         public ActionResult Login()
         {
@@ -42,6 +42,39 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                 return View();
             }
 
+        }
+        public ActionResult Register()
+        {
+            ViewBag.RoleId = new SelectList(db.tbl_Roles, "RoleId", "RoleName");
+            return View();
+        }
+
+        // POST: Users/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "UserId,Username,Password,FirstName,Surname,RoleId")] tbl_Users tbl_Users)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ms.DoesUsernameExist(tbl_Users.Username))
+                {
+                    ViewBag.Message = "Username Already Registered";
+                    ViewBag.RoleId = new SelectList(db.tbl_Roles, "RoleId", "RoleName", tbl_Users.RoleId);
+                }
+                else
+                {
+                    ms.RegisterUser(tbl_Users.Username, tbl_Users.Password, tbl_Users.FirstName, tbl_Users.Surname,
+                        tbl_Users.RoleId);
+                    ViewBag.Message = "User Registered Successfully";
+                    ViewBag.RoleId = new SelectList(db.tbl_Roles, "RoleId", "RoleName", tbl_Users.RoleId);
+                }
+
+                return View(tbl_Users);
+            }
+
+            return View(tbl_Users);
         }
 
 

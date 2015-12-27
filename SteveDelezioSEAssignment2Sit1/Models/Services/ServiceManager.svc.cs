@@ -162,5 +162,29 @@ namespace SteveDelezioSEAssignment2Sit1
 
         }
 
+        public bool DoesUsernameExist(string username)
+        {
+            if (db.tbl_Users.Where(x => x.Username == username).Count() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void RegisterUser(string username, string password, string firstName, string surname, int roleId)
+        {
+            tbl_Users u = new tbl_Users();
+            u.Username = username;
+            u.Password = password;
+            u.FirstName = firstName;
+            u.Surname = surname;
+            u.RoleId = roleId;
+            db.tbl_Users.Add(u);
+            db.SaveChanges();
+        }
+
     }
 }
