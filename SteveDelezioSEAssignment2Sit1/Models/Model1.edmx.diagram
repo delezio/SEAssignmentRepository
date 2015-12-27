@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="04d3e9bcaa694d499a4b147352f5b590" Name="Diagram1">
-        <EntityTypeShape EntityType="SEAssignment2Sit1Model.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_Articles" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_ArticleStatuses" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_Roles" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_Users" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="8e204c95be924ceeb62ccd661ec7b8b2" Name="Diagram1">
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.sysdiagram" Width="1.5" PointX="5.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_Articles" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_ArticleStates" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_ArticleStatuses" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_Roles" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_StateWorkflows" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_Users" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStates" ManuallyRouted="false" />
+        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses" ManuallyRouted="false" />
         <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_ArticleStates" ManuallyRouted="false" />
         <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Users_tbl_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStatuses" />
-        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_ArticleStates" Width="1.5" PointX="8.75" PointY="4.375" />
-        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_Articles_tbl_ArticleStates" />
-        <EntityTypeShape EntityType="SEAssignment2Sit1Model.tbl_StateWorkflows" Width="1.5" PointX="11" PointY="2.625" />
-        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_ArticleStates" />
-        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_Users" />
+        <AssociationConnector Association="SEAssignment2Sit1Model.FK_tbl_StateWorkflows_tbl_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -100,7 +100,7 @@ namespace SteveDelezioSEAssignment2Sit1
             // (IArticleState)s.GetConstructor()
 
             ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
-                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
+                articlePublishDate, userId, mediaManagerId, articleStatusId, 2, articleId);
             af.UpdateArticle();
 
         }
@@ -183,6 +183,18 @@ namespace SteveDelezioSEAssignment2Sit1
             u.Surname = surname;
             u.RoleId = roleId;
             db.tbl_Users.Add(u);
+            db.SaveChanges();
+         }
+
+        public void DefaultStateWorkflowOnRegister(int position, int stateId, int userId)
+        {
+            tbl_StateWorkflows s = new tbl_StateWorkflows
+            {
+                StateId = stateId,
+                UserId = userId,
+                WorflowPositionId = position
+            };
+            db.tbl_StateWorkflows.Add(s);
             db.SaveChanges();
         }
 

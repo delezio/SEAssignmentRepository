@@ -28,6 +28,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             return View(tbl_Articles.ToList());
         }
 
+       [Authorize(Roles = "Writer")]
         // GET: Articles/Edit/5
         public ActionResult ReviewByWriter(int? id)
         {
@@ -52,6 +53,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Writer")]
         public ActionResult ReviewByWriter([Bind(Include = "ArticleId,ArticleTitle,ArticleContent,ArticleComments,ArticlePublishDateTime,UserId,ArticleMediaManagerId,ArticleStatusId,ArticleStateId")] tbl_Articles tbl_Articles, bool checkResp = false)
         {
             if (ModelState.IsValid)
@@ -83,7 +85,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                 }
                // db.Entry(tbl_Articles).State = EntityState.Modified;
               //  db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
@@ -100,6 +102,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             var tbl_Articles = db.tbl_Articles.Include(t => t.tbl_Users).Include(t => t.tbl_ArticleStatuses).Where(x => x.UserId != userIdFromDb && x.tbl_ArticleStatuses.ArticleStatusId == 1 && x.ArticleMediaManagerId==userIdFromDb);
             return View(tbl_Articles.ToList());
         }
+        [Authorize(Roles = "MediaManager")]
         public ActionResult ReviewByMediaManager(int? id)
         {
             if (id == null)
@@ -123,6 +126,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "MediaManager")]
         public ActionResult ReviewByMediaManager([Bind(Include = "ArticleId,ArticleTitle,ArticleContent,ArticleComments,ArticlePublishDateTime,UserId,ArticleMediaManagerId,ArticleStatusId,ArticleStateId")] tbl_Articles tbl_Articles, bool checkResp = false)
         {
             if (ModelState.IsValid)
@@ -151,7 +155,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                 }
                 // db.Entry(tbl_Articles).State = EntityState.Modified;
                 //  db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
@@ -191,6 +195,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Writer")]
         public ActionResult UpdateArticle([Bind(Include = "ArticleId,ArticleTitle,ArticleContent,ArticleComments,ArticlePublishDateTime,UserId,ArticleMediaManagerId,ArticleStatusId")] tbl_Articles tbl_Articles)
         {
             if (ModelState.IsValid)
@@ -200,7 +205,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                     tbl_Articles.ArticleId);
                 //db.Entry(tbl_Articles).State = EntityState.Modified;
                // db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
@@ -229,7 +234,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         public ActionResult DeleteArticleConfirmed(int id)
         {
           ms.DeleteArticle(id);
-            return RedirectToAction("Index");
+          return RedirectToAction("Index", "Home");
         }
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
@@ -272,6 +277,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             ViewBag.ArticleStatusId = new SelectList(db.tbl_ArticleStatuses, "ArticleStatusId", "ArticleStatusName", tbl_Articles.ArticleStatusId);
             return View(tbl_Articles);
         }
+         [Authorize(Roles = "Writer")]
         public ActionResult CreateArticle()
         {
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username");
@@ -285,6 +291,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Writer")]
         public ActionResult CreateArticle([Bind(Include = "ArticleId,ArticleTitle,ArticleContent,ArticleComments,ArticlePublishDateTime,UserId,ArticleMediaManagerId,ArticleStatusId")] tbl_Articles tbl_Articles)
         {
             if (ModelState.IsValid)
@@ -304,7 +311,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                // db.tbl_Articles.Add(tbl_Articles);
 
               //  db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.UserId = new SelectList(db.tbl_Users, "UserId", "Username", tbl_Articles.UserId);

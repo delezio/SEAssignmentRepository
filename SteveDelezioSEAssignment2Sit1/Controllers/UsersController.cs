@@ -34,7 +34,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             {
                 ViewBag.Message = "";
                 FormsAuthentication.SetAuthCookie(u.Username, true);
-                return View();
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -68,6 +68,12 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
                     ms.RegisterUser(tbl_Users.Username, tbl_Users.Password, tbl_Users.FirstName, tbl_Users.Surname,
                         tbl_Users.RoleId);
                     ViewBag.Message = "User Registered Successfully";
+                   // Default Creation of Workflow
+                    tbl_Users u = db.tbl_Users.SingleOrDefault(x => x.Username == tbl_Users.Username);
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        ms.DefaultStateWorkflowOnRegister(i,i,u.UserId);
+                    }
                     ViewBag.RoleId = new SelectList(db.tbl_Roles, "RoleId", "RoleName", tbl_Users.RoleId);
                 }
 

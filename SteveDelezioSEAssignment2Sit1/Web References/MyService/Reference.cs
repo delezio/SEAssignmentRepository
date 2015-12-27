@@ -51,6 +51,8 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         private System.Threading.SendOrPostCallback RegisterUserOperationCompleted;
         
+        private System.Threading.SendOrPostCallback DefaultStateWorkflowOnRegisterOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -121,6 +123,9 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         
         /// <remarks/>
         public event RegisterUserCompletedEventHandler RegisterUserCompleted;
+        
+        /// <remarks/>
+        public event DefaultStateWorkflowOnRegisterCompletedEventHandler DefaultStateWorkflowOnRegisterCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/DoWork", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -535,6 +540,38 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IServiceManager/DefaultStateWorkflowOnRegister", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void DefaultStateWorkflowOnRegister(int position, int stateId, int userId) {
+            this.Invoke("DefaultStateWorkflowOnRegister", new object[] {
+                        position,
+                        stateId,
+                        userId});
+        }
+        
+        /// <remarks/>
+        public void DefaultStateWorkflowOnRegisterAsync(int position, int stateId, int userId) {
+            this.DefaultStateWorkflowOnRegisterAsync(position, stateId, userId, null);
+        }
+        
+        /// <remarks/>
+        public void DefaultStateWorkflowOnRegisterAsync(int position, int stateId, int userId, object userState) {
+            if ((this.DefaultStateWorkflowOnRegisterOperationCompleted == null)) {
+                this.DefaultStateWorkflowOnRegisterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDefaultStateWorkflowOnRegisterOperationCompleted);
+            }
+            this.InvokeAsync("DefaultStateWorkflowOnRegister", new object[] {
+                        position,
+                        stateId,
+                        userId}, this.DefaultStateWorkflowOnRegisterOperationCompleted, userState);
+        }
+        
+        private void OnDefaultStateWorkflowOnRegisterOperationCompleted(object arg) {
+            if ((this.DefaultStateWorkflowOnRegisterCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.DefaultStateWorkflowOnRegisterCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -640,6 +677,10 @@ namespace SteveDelezioSEAssignment2Sit1.MyService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
     public delegate void RegisterUserCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.79.0")]
+    public delegate void DefaultStateWorkflowOnRegisterCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

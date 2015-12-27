@@ -122,22 +122,11 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StateWorkflowsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Patterns\ArticleComponent.cs" />
-    <Compile Include="Models\Patterns\ArticleFactory.cs" />
-    <Compile Include="Models\Patterns\StatePattern\IArticleState.cs" />
-    <Compile Include="Models\Patterns\FacebookArticle.cs" />
-    <Compile Include="Models\Patterns\PublishToAll.cs" />
-    <Compile Include="Models\Patterns\StatePattern\NewArticleState.cs" />
-    <Compile Include="Models\Patterns\StatePattern\ReviewByMediaManagerState.cs" />
-    <Compile Include="Models\Patterns\StatePattern\ReviewByWriterArticleState.cs" />
-    <Compile Include="Models\Patterns\TextArticle.cs" />
-    <Compile Include="Models\Patterns\TwitterArticle.cs" />
-    <Compile Include="Models\Patterns\VideoArticle.cs" />
-    <Compile Include="Models\Services\IServiceManager.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,6 +142,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Patterns\ArticleComponent.cs" />
+    <Compile Include="Models\Patterns\ArticleFactory.cs" />
+    <Compile Include="Models\Patterns\StatePattern\IArticleState.cs" />
+    <Compile Include="Models\Patterns\FacebookArticle.cs" />
+    <Compile Include="Models\Patterns\PublishToAll.cs" />
+    <Compile Include="Models\Patterns\StatePattern\NewArticleState.cs" />
+    <Compile Include="Models\Patterns\StatePattern\ReviewByMediaManagerState.cs" />
+    <Compile Include="Models\Patterns\StatePattern\ReviewByWriterArticleState.cs" />
+    <Compile Include="Models\Patterns\TextArticle.cs" />
+    <Compile Include="Models\Patterns\TwitterArticle.cs" />
+    <Compile Include="Models\Patterns\VideoArticle.cs" />
+    <Compile Include="Models\Services\IServiceManager.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -268,6 +269,11 @@
     <Content Include="Views\Articles\ReviewByMediaManager.cshtml" />
     <Content Include="Views\Articles\ListOfArticlesForReviewByMediaManager.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
+    <Content Include="Views\StateWorkflows\Create.cshtml" />
+    <Content Include="Views\StateWorkflows\Delete.cshtml" />
+    <Content Include="Views\StateWorkflows\Details.cshtml" />
+    <Content Include="Views\StateWorkflows\Edit.cshtml" />
+    <Content Include="Views\StateWorkflows\Index.cshtml" />
     <None Include="Web References\MyService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

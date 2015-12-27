@@ -1,0 +1,42 @@
+﻿@model SteveDelezioSEAssignment2Sit1.Models.tbl_StateWorkflows
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_StateWorkflows</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorflowPositionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorflowPositionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_ArticleStates.StateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_ArticleStates.StateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Users.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Users.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StateWorkflow_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

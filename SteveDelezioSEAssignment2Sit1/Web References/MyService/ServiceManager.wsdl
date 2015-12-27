@@ -172,6 +172,18 @@
       <xs:element name="RegisterUserResponse">
         <xs:complexType />
       </xs:element>
+      <xs:element name="DefaultStateWorkflowOnRegister">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="position" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="stateId" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="userId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DefaultStateWorkflowOnRegisterResponse">
+        <xs:complexType />
+      </xs:element>
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IServiceManager_DoWork_InputMessage">
@@ -240,6 +252,12 @@
   <wsdl:message name="IServiceManager_RegisterUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceManager_DefaultStateWorkflowOnRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:DefaultStateWorkflowOnRegister" />
+  </wsdl:message>
+  <wsdl:message name="IServiceManager_DefaultStateWorkflowOnRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DefaultStateWorkflowOnRegisterResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceManager">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DoWork" message="tns:IServiceManager_DoWork_InputMessage" />
@@ -284,6 +302,10 @@
     <wsdl:operation name="RegisterUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/RegisterUser" message="tns:IServiceManager_RegisterUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/RegisterUserResponse" message="tns:IServiceManager_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DefaultStateWorkflowOnRegister">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceManager/DefaultStateWorkflowOnRegister" message="tns:IServiceManager_DefaultStateWorkflowOnRegister_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceManager/DefaultStateWorkflowOnRegisterResponse" message="tns:IServiceManager_DefaultStateWorkflowOnRegister_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceManager" type="tns:IServiceManager">
@@ -380,6 +402,15 @@
     </wsdl:operation>
     <wsdl:operation name="RegisterUser">
       <soap:operation soapAction="http://tempuri.org/IServiceManager/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DefaultStateWorkflowOnRegister">
+      <soap:operation soapAction="http://tempuri.org/IServiceManager/DefaultStateWorkflowOnRegister" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
