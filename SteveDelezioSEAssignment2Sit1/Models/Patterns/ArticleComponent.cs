@@ -7,12 +7,10 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
 {
     public  abstract class ArticleComponent
     {
-        ArticleFactory ArticleFactory { get; set; }
         ArticleComponent ArticleComp { get; set; }
 
-        public ArticleComponent(ArticleFactory articleFactory, ArticleComponent articleComponent)
+        public ArticleComponent(ArticleComponent articleComponent)
         {
-            ArticleFactory = articleFactory;
             ArticleComp= articleComponent;
         }
 

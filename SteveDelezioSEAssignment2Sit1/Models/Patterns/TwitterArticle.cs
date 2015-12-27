@@ -7,14 +7,8 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
 {
     public class TwitterArticle : ArticleComponent
     {
-        private ArticleFactory myArticleFactory;
-        public TwitterArticle(ArticleFactory articleFactory, ArticleComponent articleComponent) : base(articleFactory, articleComponent)
+        public TwitterArticle(ArticleComponent articleComponent) : base(articleComponent)
         {
-        }
-
-        public TwitterArticle(ArticleFactory articleFactory)
-        {
-            myArticleFactory = articleFactory;
         }
 
         public override void Upload(ArticleFactory a)

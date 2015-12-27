@@ -10,8 +10,8 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
     {
         public void Publish()
         {
-            ArticleFactory af = new TextArticle();
-            ArticleComponent ac = new FacebookArticle(af,new TwitterArticle(af));
+            TextArticle af = new TextArticle();
+            ArticleComponent ac = new FacebookArticle(new TwitterArticle(null));
             ac.Upload(af);
 
             
