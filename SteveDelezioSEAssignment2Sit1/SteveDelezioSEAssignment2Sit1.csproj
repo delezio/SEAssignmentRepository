@@ -122,11 +122,13 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\StateWorkflowsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Articles.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,6 +153,7 @@
     <Compile Include="Models\Patterns\StatePattern\ReviewByMediaManagerState.cs" />
     <Compile Include="Models\Patterns\StatePattern\ReviewByWriterArticleState.cs" />
     <Compile Include="Models\Patterns\TextArticle.cs" />
+    <Compile Include="Models\Patterns\TextArticleFactory.cs" />
     <Compile Include="Models\Patterns\TwitterArticle.cs" />
     <Compile Include="Models\Patterns\VideoArticle.cs" />
     <Compile Include="Models\Services\IServiceManager.cs" />
@@ -216,6 +219,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -274,10 +278,15 @@
     <Content Include="Views\StateWorkflows\Details.cshtml" />
     <Content Include="Views\StateWorkflows\Edit.cshtml" />
     <Content Include="Views\StateWorkflows\Index.cshtml" />
-    <None Include="Web References\MyService\Reference.map">
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Web References\MyService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    </Content>
     <None Include="Web References\MyService\ServiceManager.wsdl" />
   </ItemGroup>
   <ItemGroup>

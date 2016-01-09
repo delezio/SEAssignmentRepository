@@ -6,7 +6,7 @@ using SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern;
 
 namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
 {
-    public class TextArticle : ArticleFactory
+    public class TextArticle : Articles
     {
         public IArticleState state;
         public string articleTitle;

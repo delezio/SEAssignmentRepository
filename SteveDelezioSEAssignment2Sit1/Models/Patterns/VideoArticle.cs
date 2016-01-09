@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
 {
-    public class VideoArticle : ArticleFactory
+    public class VideoArticle : Articles
     {
         public override void CreateArticle()
         {

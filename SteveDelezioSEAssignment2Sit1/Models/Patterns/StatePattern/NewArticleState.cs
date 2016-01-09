@@ -8,9 +8,9 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern
 {
     public class NewArticleState : IArticleState
     {
-        private ArticleFactory a;
+        private Articles a;
         private DataContext db = new DataContext();
-        public NewArticleState(ArticleFactory a)
+        public NewArticleState(Articles a)
         {
             this.a = a;
         }

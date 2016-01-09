@@ -57,5 +57,6 @@ namespace SteveDelezioSEAssignment2Sit1
         [OperationContract]
         [XmlSerializerFormat]
         void DefaultStateWorkflowOnRegister(int position, int stateId, int userId);
+
     }
 }

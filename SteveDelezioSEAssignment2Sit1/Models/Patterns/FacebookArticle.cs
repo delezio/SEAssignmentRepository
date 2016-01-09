@@ -11,7 +11,7 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
             : base(articleComponent)
         {
         }
-        public override void Upload(ArticleFactory a)
+        public override void Upload(Articles a)
         {
 
             //Upload to Facebook

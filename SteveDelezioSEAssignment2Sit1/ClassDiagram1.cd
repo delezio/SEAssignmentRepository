@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAQAAJCAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\StatePattern\NewArticleState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByMediaManagerState" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAQAAJCAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\StatePattern\ReviewByMediaManagerState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByWriterArticleState" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAQAAJCAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\StatePattern\ReviewByWriterArticleState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.ArticleComponent">
+    <Position X="3" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\ArticleComponent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ArticleComp" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.FacebookArticle">
+    <Position X="4.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\FacebookArticle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.TwitterArticle">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\TwitterArticle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.ArticleFactory">
+    <Position X="9.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAAAAJCAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\Patterns\ArticleFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.TextArticle">
+    <Position X="11.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAACBAAkAJCCAAACQAAAAAAAAAEAAAAAIAAABA=</HashCode>
+      <FileName>Models\Patterns\TextArticle.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="state" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.VideoArticle">
+    <Position X="7" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\VideoArticle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SteveDelezioSEAssignment2Sit1.ServiceManager">
+    <Position X="14.25" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>EIAQEAAAAAQQAAJCAAgAEAAIAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Services\ServiceManager.svc.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.IArticleState">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEAAAAAAAAAJCAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Patterns\StatePattern\IArticleState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SteveDelezioSEAssignment2Sit1.IServiceManager">
+    <Position X="17" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EIAQEAAAAAQAAAJCAAgAEAAIAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Services\IServiceManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

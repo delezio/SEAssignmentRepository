@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using SteveDelezioSEAssignment2Sit1.Models;
 
 namespace SteveDelezioSEAssignment2Sit1.Controllers
@@ -15,16 +16,30 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         private DataContext db = new DataContext();
         MyService.ServiceManager ms = new MyService.ServiceManager();
         // GET: Articles
+
+        public tbl_Articles GetArticleById(int id)
+        {
+            var mya = db.tbl_Articles.SingleOrDefault(x => x.ArticleId == id);
+            return mya;
+        }
         public ActionResult Index()
         {
             var tbl_Articles = db.tbl_Articles.Include(t => t.tbl_Users).Include(t => t.tbl_ArticleStatuses);
             return View(tbl_Articles.ToList());
         }
+
+        public IEnumerable<tbl_Articles> GetArticlesOfOtherWritersAndStatus(string Username,int articleStatus)
+        {
+            int userIdFromDb = db.tbl_Users.Single(y => y.Username == Username).UserId;
+            var Articles = db.tbl_Articles.Include(t => t.tbl_Users).Include(t => t.tbl_ArticleStatuses).Where(x => x.UserId != userIdFromDb && x.tbl_ArticleStatuses.ArticleStatusId == articleStatus);
+            return Articles;
+        }
         [Authorize(Roles = "Writer")]
         public ActionResult ListOfArticlesForReviewByOtherWriter()
         {
-            int userIdFromDb = db.tbl_Users.Single(y => y.Username == HttpContext.User.Identity.Name).UserId;
-            var tbl_Articles = db.tbl_Articles.Include(t => t.tbl_Users).Include(t => t.tbl_ArticleStatuses).Where(x => x.UserId !=userIdFromDb && x.tbl_ArticleStatuses.ArticleStatusId==5 );
+            tbl_Users User = db.tbl_Users.Single(y => y.Username == HttpContext.User.Identity.Name);
+
+            var tbl_Articles = GetArticlesOfOtherWritersAndStatus(User.Username, 5);
             return View(tbl_Articles.ToList());
         }
 
@@ -237,13 +252,13 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
           return RedirectToAction("Index", "Home");
         }
         // GET: Articles/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbl_Articles tbl_Articles = db.tbl_Articles.Find(id);
+            tbl_Articles tbl_Articles = GetArticleById(id);
             if (tbl_Articles == null)
             {
                 return HttpNotFound();
@@ -298,12 +313,16 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
             {
                 tbl_Articles.ArticleComments = "";
                 tbl_Articles.UserId = db.tbl_Users.SingleOrDefault(x=>x.Username==HttpContext.User.Identity.Name).UserId;
-                tbl_ArticleStates ast  =
-                    db.tbl_ArticleStates.SingleOrDefault(x => x.StateName == "ReviewByWriterArticleState");
-                tbl_StateWorkflows getFlow =
+                //tbl_ArticleStates ast  =
+                //    db.tbl_ArticleStates.SingleOrDefault(x => x.StateName == "ReviewByWriterArticleState");
+                //tbl_StateWorkflows getFlow =
+                //    db.tbl_StateWorkflows.SingleOrDefault(
+                //        x => x.UserId == tbl_Articles.UserId && x.StateId==ast.StateId);
+                //if (getFlow != null) tbl_Articles.ArticleStateId = getFlow.StateId;
+                tbl_StateWorkflows stateInPositiontwo =
                     db.tbl_StateWorkflows.SingleOrDefault(
-                        x => x.UserId == tbl_Articles.UserId && x.StateId==ast.StateId);
-                if (getFlow != null) tbl_Articles.ArticleStateId = getFlow.StateId;
+                        x => x.UserId == tbl_Articles.UserId && x.WorflowPositionId == 2);
+                tbl_Articles.ArticleStateId = stateInPositiontwo.StateId;
                 tbl_Articles.ArticleStatusId = 5;
                 ms.CreateArticle(tbl_Articles.ArticleTitle, tbl_Articles.ArticleContent, tbl_Articles.ArticleComments,
                     tbl_Articles.ArticlePublishDateTime, tbl_Articles.UserId, tbl_Articles.ArticleMediaManagerId,
@@ -321,7 +340,7 @@ namespace SteveDelezioSEAssignment2Sit1.Controllers
         }
 
         // GET: Articles/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {

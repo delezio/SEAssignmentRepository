@@ -8,6 +8,7 @@ using System.Text;
 using SteveDelezioSEAssignment2Sit1.Models.Patterns;
 using SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern;
 using System.Reflection;
+using System.Data;
 
 namespace SteveDelezioSEAssignment2Sit1
 {
@@ -21,6 +22,14 @@ namespace SteveDelezioSEAssignment2Sit1
         }
         public bool Login(string username, string password)
         {
+            if (username.Length > 50 || password.Length > 50)
+            {
+                return false;
+            }
+            if (username.Length == 0 || password.Length == 0)
+            {
+                return false;
+            }
             if (db.tbl_Users.Where(x => x.Username == username && x.Password == password).Count() > 0)
             {
                 return true;
@@ -38,13 +47,20 @@ namespace SteveDelezioSEAssignment2Sit1
             // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState.cs");
             //string state =db.tbl_Articles.SingleOrDefault(x => x.ArticleId == 1).tbl_ArticleStates.StateName;
             // string fullname = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + state;
-            Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
-            //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
-            // (IArticleState)s.GetConstructor()
 
-            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
-                articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId);
-            af.CreateArticle();
+            if (articleTitle.Length != 0 && articleContent.Length != 0)
+            {
+                Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
+                //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
+                // (IArticleState)s.GetConstructor()
+                ArticleFactory afe = new TextArticleFactory();
+                Articles af = afe.CreateTextArticle((IArticleState) Activator.CreateInstance(s), articleTitle,
+                    articleContent, articleComment,
+                    articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId);
+                //   ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+                //       articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId);
+                af.CreateArticle();
+            }
 
         }
         public void AcceptArticle(string articleTitle, string articleContent, string articleComment,
@@ -58,9 +74,13 @@ namespace SteveDelezioSEAssignment2Sit1
             //   Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByWriterArticleState");
             //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
             // (IArticleState)s.GetConstructor()
-
-            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+            ArticleFactory afe = new TextArticleFactory();
+            Articles af = afe.CreateTextArticlewitId((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
                 articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
+
+
+            //ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+            //    articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
             af.AcceptArticle();
 
         }
@@ -79,29 +99,44 @@ namespace SteveDelezioSEAssignment2Sit1
             //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
             // (IArticleState)s.GetConstructor()
 
-            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+
+            ArticleFactory afe = new TextArticleFactory();
+            Articles af = afe.CreateTextArticlewitId((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
                 articlePublishDate, userId, mediaManagerId, articleStatusId, 1, articleId);
+
+
+          //  ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+           //     articlePublishDate, userId, mediaManagerId, articleStatusId, 1, articleId);
             af.RejectArticle();
 
         }
         public void UpdateArticle(string articleTitle, string articleContent, string articleComment,
          DateTime articlePublishDate, int userId, int mediaManagerId, int articleStatusId, int articleStateId, int articleId)
         {
-            // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState.cs");
-            //string state =db.tbl_Articles.SingleOrDefault(x => x.ArticleId == 1).tbl_ArticleStates.StateName;
-            // string fullname = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + state;
-            string currentStateName =
-              db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
-            if (currentStateName == null) throw new ArgumentNullException("currentStateName");
-            string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
-            Type s = Type.GetType(fullstringtype);
-            //Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
-            //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
-            // (IArticleState)s.GetConstructor()
+            if (articleTitle != String.Empty && articleContent != String.Empty)
+            {
+                // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState.cs");
+                //string state =db.tbl_Articles.SingleOrDefault(x => x.ArticleId == 1).tbl_ArticleStates.StateName;
+                // string fullname = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + state;
+                string currentStateName =
+                    db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId).tbl_ArticleStates.StateName;
+                if (currentStateName == null) throw new ArgumentNullException("currentStateName");
+                string fullstringtype = "SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern." + currentStateName;
+                Type s = Type.GetType(fullstringtype);
+                //Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
+                //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
+                // (IArticleState)s.GetConstructor()
 
-            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
-                articlePublishDate, userId, mediaManagerId, articleStatusId, 2, articleId);
-            af.UpdateArticle();
+                ArticleFactory afe = new TextArticleFactory();
+                Articles af = afe.CreateTextArticlewitId((IArticleState) Activator.CreateInstance(s), articleTitle,
+                    articleContent, articleComment,
+                    articlePublishDate, userId, mediaManagerId, articleStatusId, 2, articleId);
+
+
+                //   ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+                //      articlePublishDate, userId, mediaManagerId, articleStatusId, 2, articleId);
+                af.UpdateArticle();
+            }
 
         }
 
@@ -115,7 +150,12 @@ namespace SteveDelezioSEAssignment2Sit1
             // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.NewArticleState");
             //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
             // (IArticleState)s.GetConstructor()
-            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleId);
+
+            ArticleFactory afe = new TextArticleFactory();
+            Articles af = afe.CreateTextArticlewitIdandState((IArticleState) Activator.CreateInstance(s), articleId);
+
+
+           // ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleId);
             af.DeleteArticle();
         }
 
@@ -135,9 +175,14 @@ namespace SteveDelezioSEAssignment2Sit1
             // Type s = Type.GetType("SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern.ReviewByMediaManagerState");
             //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
             // (IArticleState)s.GetConstructor()
-            
-            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+
+            ArticleFactory afe = new TextArticleFactory();
+            Articles af = afe.CreateTextArticlewitId((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
                 articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
+
+
+          //  ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+          //      articlePublishDate, userId, mediaManagerId, articleStatusId, articleStateId, articleId);
             af.AcceptArticle();
 
         }
@@ -156,8 +201,13 @@ namespace SteveDelezioSEAssignment2Sit1
             //ConstructorInfo ctor = s.GetConstructor(new[] { typeof(IArticleState) });
             // (IArticleState)s.GetConstructor()
 
-            ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+            ArticleFactory afe = new TextArticleFactory();
+            Articles af = afe.CreateTextArticlewitId((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
                 articlePublishDate, userId, mediaManagerId, articleStatusId, 1, articleId);
+
+
+           // ArticleFactory af = new TextArticle((IArticleState)Activator.CreateInstance(s), articleTitle, articleContent, articleComment,
+           //     articlePublishDate, userId, mediaManagerId, articleStatusId, 1, articleId);
             af.RejectArticle();
 
         }
@@ -197,6 +247,8 @@ namespace SteveDelezioSEAssignment2Sit1
             db.tbl_StateWorkflows.Add(s);
             db.SaveChanges();
         }
+
+       
 
     }
 }

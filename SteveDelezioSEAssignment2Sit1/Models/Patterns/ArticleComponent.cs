@@ -19,7 +19,7 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
             
         }
 
-        public abstract void Upload(ArticleFactory a);
+        public abstract void Upload(Articles a);
 
     }
 }

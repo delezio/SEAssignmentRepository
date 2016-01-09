@@ -11,7 +11,7 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns
         {
         }
 
-        public override void Upload(ArticleFactory a)
+        public override void Upload(Articles a)
         {
             //Upload to Twitter
         }
