@@ -64,9 +64,10 @@ namespace SteveDelezioSEAssignment2Sit1.Models.Patterns.StatePattern
 
         public void DeleteArticle(int articleId)
         {
+            //!=
             tbl_Articles a = db.tbl_Articles.SingleOrDefault(x => x.ArticleId == articleId);
             db.Entry(a).State= EntityState.Deleted;
-            db.SaveChanges();
+            //db.SaveChanges();
         }
     }
 }

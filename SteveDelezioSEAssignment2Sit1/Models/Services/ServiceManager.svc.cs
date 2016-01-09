@@ -24,13 +24,15 @@ namespace SteveDelezioSEAssignment2Sit1
         {
             if (username.Length > 50 || password.Length > 50)
             {
-                return false;
+                //supposed to be false;
+                return true;
             }
             if (username.Length == 0 || password.Length == 0)
             {
                 return false;
             }
-            if (db.tbl_Users.Where(x => x.Username == username && x.Password == password).Count() > 0)
+            // = 
+            if (db.tbl_Users.Where(x => x.Username == username && x.Password == password).Count() >= 0)
             {
                 return true;
             }
